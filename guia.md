@@ -89,9 +89,13 @@ En tu Mac, abre el **Finder** y ve al menú **Ir > Conectarse al servidor...** (
 
 ![Finder de Mac OS mostrando la conexión al servidor Samba](8.png)
 
+![Tanto las instancias de Linux como las de Mac OS comparten la misma carpeta](9.png)
+
 ¡Felicidades! Ahora deberías ver la carpeta compartida y poder acceder a ella desde tu Mac y tu máquina Linux simultáneamente.
 
-![Tanto las instancias de Linux como las de Mac OS comparten la misma carpeta](9.png)
+![Tanto las instancias de Linux como las de Mac OS comparten la misma carpeta](11.png)
+![Tanto las instancias de Linux como las de Mac OS comparten la misma carpeta](12.png)
+
 
 ## Parte 3: Configuración Avanzada con Permisos de Grupo
 
@@ -111,7 +115,7 @@ A continuación, cambiamos el propietario de la carpeta compartida al usuario `r
 sudo chown root:sambagroup /home/sharedfolder
 ```
 
-![Comando 'chown' para asignar el grupo a la carpeta](10.png)
+![Comando 'chown' para asignar el grupo a la carpeta](14.png)
 
 Ahora, ajustamos los permisos para que solo el propietario y los miembros del grupo puedan escribir en la carpeta.
 
@@ -119,7 +123,7 @@ Ahora, ajustamos los permisos para que solo el propietario y los miembros del gr
 sudo chmod 775 /home/sharedfolder
 ```
 
-![Archivos dentro de la carpeta compartida con permisos](11.png)
+![Archivos dentro de la carpeta compartida con permisos](15.png)
 
 ### Paso 10: Modificar la Configuración de Samba para Usar Grupos
 
@@ -143,7 +147,7 @@ create mask = 0664
 directory mask = 0775
 ```
 
-![Modificar el archivo 'smb.conf' con grupos de usuarios](12.png)
+![Modificar el archivo 'smb.conf' con grupos de usuarios](16.png)
 
 ### Paso 11: Añadir Usuarios al Grupo y a Samba
 
@@ -153,7 +157,7 @@ Supongamos que tienes un usuario en Linux llamado `testuser`. Primero, lo añadi
 sudo usermod -aG sambagroup testuser
 ```
 
-![Comando 'sudo usermod -aG'](13.png)
+![Comando 'sudo usermod -aG'](17.png)
 
 Un usuario de Linux no es automáticamente un usuario de Samba. Debes crearle una contraseña específica para Samba.
 
@@ -173,4 +177,4 @@ sudo systemctl restart smbd
 
 Ahora, cuando intentes conectarte desde tu Mac u otro cliente, el sistema te pedirá un nombre de usuario y una contraseña. Usa las credenciales que acabas de configurar con `smbpasswd`.
 
-![Usuario intentando acceder al servidor Samba](14.png)
+![Usuario intentando acceder al servidor Samba](18.png)
