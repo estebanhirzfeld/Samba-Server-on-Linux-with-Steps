@@ -103,16 +103,16 @@ Ahora, haremos la configuración más segura, restringiendo el acceso solo a usu
 
 ### Paso 9: Crear un Grupo y Asignar Propiedad
 
-Primero, creamos un grupo de usuarios que tendrá acceso a la carpeta. Lo llamaremos `sambagroup`.
+Primero, creamos un grupo de usuarios que tendrá acceso a la carpeta. Lo llamaremos `sambausers`.
 
 ```bash
-sudo groupadd sambagroup
+sudo groupadd sambausers
 ```
 
-A continuación, cambiamos el propietario de la carpeta compartida al usuario `root` y al grupo `sambagroup`.
+A continuación, cambiamos el propietario de la carpeta compartida al usuario `root` y al grupo `sambausers`.
 
 ```bash
-sudo chown root:sambagroup /home/sharedfolder
+sudo chown root:sambausers /home/sharedfolder
 ```
 
 ![Comando 'chown' para asignar el grupo a la carpeta](14.png)
@@ -140,9 +140,9 @@ Modifica la sección que creaste antes para que se vea así. Eliminamos el acces
 path = /home/sharedfolder
 browseable = yes
 read only = no
-valid users = @sambagroup
-write list = @sambagroup
-force group = sambagroup
+valid users = @sambausers
+write list = @sambausers
+force group = sambausers
 create mask = 0664
 directory mask = 0775
 ```
@@ -151,10 +151,10 @@ directory mask = 0775
 
 ### Paso 11: Añadir Usuarios al Grupo y a Samba
 
-Supongamos que tienes un usuario en Linux llamado `testuser`. Primero, lo añadimos al grupo `sambagroup`.
+Supongamos que tienes un usuario en Linux llamado `testuser`. Primero, lo añadimos al grupo `sambausers`.
 
 ```bash
-sudo usermod -aG sambagroup testuser
+sudo usermod -aG sambausers testuser
 ```
 
 ![Comando 'sudo usermod -aG'](17.png)
