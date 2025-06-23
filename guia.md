@@ -24,7 +24,7 @@ Ahora, crearemos el directorio que queremos compartir en la red. Para este ejemp
 sudo mkdir /home/sharedfolder
 ```
 
-![Comando para crear una carpeta compartida](2.png)
+![Comando para crear una carpeta compartida](3.png)
 
 ### Paso 3: Asignar Permisos a la Carpeta
 
@@ -36,7 +36,7 @@ Para que cualquier usuario pueda acceder y escribir en la carpeta sin problemas 
 sudo chmod 777 /home/sharedfolder
 ```
 
-![Comando para establecer permisos para la carpeta compartida](3.png)
+![Comando para establecer permisos para la carpeta compartida](4.png)
 
 ### Paso 4: Configurar el Recurso Compartido
 
@@ -46,7 +46,7 @@ Debemos editar el archivo de configuración de Samba, llamado `smb.conf`, para d
 sudo nano /etc/samba/smb.conf
 ```
 
-![Comando para abrir el archivo 'smb.conf' y modificar los permisos del recurso compartido](4.png)
+![Comando para abrir el archivo 'smb.conf' y modificar los permisos del recurso compartido](5.png)
 
 Ve hasta el final del archivo y añade las siguientes líneas:
 
@@ -67,7 +67,7 @@ Para que los cambios en la configuración surtan efecto, debemos reiniciar el se
 sudo systemctl restart smbd
 ```
 
-![Comando para reiniciar el servicio de Samba](5.png)
+![Comando para reiniciar el servicio de Samba](6.png)
 
 ## Parte 2: Conectarse desde un Cliente (macOS)
 
@@ -79,7 +79,7 @@ Para conectarte, necesitas saber el nombre de host (hostname) o la dirección IP
 hostname
 ```
 
-![Comando para mostrar el nombre de host](6.png)
+![Comando para mostrar el nombre de host](7.png)
 
 ### Paso 7: Conexión desde macOS
 
@@ -87,11 +87,11 @@ En tu Mac, abre el **Finder** y ve al menú **Ir > Conectarse al servidor...** (
 
 `smb://nombre-del-servidor`
 
-![Finder de Mac OS mostrando la conexión al servidor Samba](7.png)
+![Finder de Mac OS mostrando la conexión al servidor Samba](8.png)
 
 ¡Felicidades! Ahora deberías ver la carpeta compartida y poder acceder a ella desde tu Mac y tu máquina Linux simultáneamente.
 
-![Tanto las instancias de Linux como las de Mac OS comparten la misma carpeta](8.png)
+![Tanto las instancias de Linux como las de Mac OS comparten la misma carpeta](9.png)
 
 ## Parte 3: Configuración Avanzada con Permisos de Grupo
 
@@ -111,7 +111,7 @@ A continuación, cambiamos el propietario de la carpeta compartida al usuario `r
 sudo chown root:sambagroup /home/sharedfolder
 ```
 
-![Comando 'chown' para asignar el grupo a la carpeta](9.png)
+![Comando 'chown' para asignar el grupo a la carpeta](10.png)
 
 Ahora, ajustamos los permisos para que solo el propietario y los miembros del grupo puedan escribir en la carpeta.
 
@@ -119,7 +119,7 @@ Ahora, ajustamos los permisos para que solo el propietario y los miembros del gr
 sudo chmod 775 /home/sharedfolder
 ```
 
-![Archivos dentro de la carpeta compartida con permisos](10.png)
+![Archivos dentro de la carpeta compartida con permisos](11.png)
 
 ### Paso 10: Modificar la Configuración de Samba para Usar Grupos
 
@@ -143,7 +143,7 @@ create mask = 0664
 directory mask = 0775
 ```
 
-![Modificar el archivo 'smb.conf' con grupos de usuarios](11.png)
+![Modificar el archivo 'smb.conf' con grupos de usuarios](12.png)
 
 ### Paso 11: Añadir Usuarios al Grupo y a Samba
 
@@ -153,7 +153,7 @@ Supongamos que tienes un usuario en Linux llamado `testuser`. Primero, lo añadi
 sudo usermod -aG sambagroup testuser
 ```
 
-![Comando 'sudo usermod -aG'](12.png)
+![Comando 'sudo usermod -aG'](13.png)
 
 Un usuario de Linux no es automáticamente un usuario de Samba. Debes crearle una contraseña específica para Samba.
 
@@ -173,4 +173,4 @@ sudo systemctl restart smbd
 
 Ahora, cuando intentes conectarte desde tu Mac u otro cliente, el sistema te pedirá un nombre de usuario y una contraseña. Usa las credenciales que acabas de configurar con `smbpasswd`.
 
-![Usuario intentando acceder al servidor Samba](13.png)
+![Usuario intentando acceder al servidor Samba](14.png)
